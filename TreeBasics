@@ -1,0 +1,98 @@
+
+class Node{
+    int val;
+    Node left;
+    Node right;
+    
+    public Node(int val){
+        this.val=val;
+        left=right=null;
+    }
+}
+
+public class BinaryTree{
+    Node root;
+    public BinaryTree(){
+        root=null;
+    }
+    
+    //Insert new Node with given value
+    public void insert(int val){
+        root=insertRec(root, val);
+    }
+    
+    // A recursive function to insert a new key in BST 
+    public Node insertRec(Node root, int val){
+        //if the tree is empty then return new Node
+        if(root==null){
+            root = new Node(val);
+            return root;
+        }
+        
+        if(val < root.val){
+            root.left=insertRec(root.left, val);
+        }else{
+            root.right=insertRec(root.right, val);
+        }
+        
+         // return the (unchanged) node pointer
+         return root;
+    }
+    //print tree in inorder traversal using recurssion
+    private void inorderRec(Node root){
+        if(root != null) {
+            inorderRec(root.left);
+            System.out.print(root.val +" ");
+            inorderRec(root.right);
+        }
+    }
+    
+    //PreOrder Traversal of BST
+    private void preOrder(Node root){
+        if(root==null) return;
+        
+        System.out.print(root.val +" ");
+        
+        preOrder(root.left);
+        
+        preOrder(root.right);
+    }
+    
+    //Post-Order Traversal of BST
+    private void postOrder(Node root){
+        if(root==null) return;
+        
+        preOrder(root.left);
+        
+        preOrder(root.right);
+        
+        System.out.print(root.val +" ");
+    }
+    
+    public static void main(String []args){
+        
+        BinaryTree obj=new BinaryTree();
+        
+        //insert Node
+        obj.insert(8);
+        obj.insert(3);
+        obj.insert(1);
+        obj.insert(6);
+        obj.insert(4);
+        obj.insert(7);
+        obj.insert(10);
+        obj.insert(13);
+        obj.insert(14);
+        
+        //print tree inorder travarsal
+        System.out.println("Inorder traversal");
+        obj.inorderRec(obj.root);
+        
+        System.out.println("PreOrder traversal");
+        obj.preOrder(obj.root);
+        
+        System.out.println("PostOrder traversal");
+        obj.postOrder(obj.root);
+    }
+    
+}
